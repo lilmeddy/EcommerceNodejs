@@ -9,7 +9,19 @@ const signup = async(req,res,next) =>{
         if(checkUser){
             return res.status(401).send({ message: "Email used", status: false });
         }
+
+        const signUp = await userModel.create({
+            firstName,
+            lastName,
+            email,
+            password,
+        });
+
+        console.log(signUp);
+        res.status(210).send({ message: "User Created", status: true });
     } catch (error) {
-        
+      next(error)  
     }
 }
+
+export{signup}
