@@ -7,4 +7,8 @@ const validate =(schema) => async(req,res,next)=>{
         console.log(error);
         return res.status(409).send({message:error.message})
     }
+
+    
 }
+
+export{validate}
