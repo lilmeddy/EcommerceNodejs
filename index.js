@@ -2,8 +2,7 @@ import express from "express";
 import env from "dotenv";
 import cors from "cors";
 import { connectDB } from "./database/connectDB.js";
-// import { userRoutes } from "./routes/userRoutes.js";
-// import { errorHandler } from "./middlewares/errorHandler.js";
+import { userRoutes } from "./routes/userRoutes.js";
 
 
 
@@ -13,8 +12,8 @@ const app = express();
 app.use(cors({origin:"*"}))
 app.use(express.json({limit:"100mb"}));
 app.use(express.urlencoded({ extended: true, limit:"100mb"}));
-// app.use("/users", userRoutes)
-// app.use(errorHandler)
+app.use("/users", userRoutes)
+
 connectDB()
 
 

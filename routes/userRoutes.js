@@ -5,3 +5,6 @@ import { userValidate } from "../middlewares/userValidate.js";
 
 const userRoutes = express.Router()
 userRoutes.post("/signup", validate(userValidate),signup);
+
+
+export { userRoutes };
