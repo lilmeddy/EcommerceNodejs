@@ -49,4 +49,4 @@ const login = async (req, res, next) => {
   }
 };
 
-export { signup };
+export { signup , login };
