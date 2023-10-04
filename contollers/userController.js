@@ -36,8 +36,7 @@ const login = async (req, res, next) => {
     if (!verifyPass){
         return res.status(401).send({ message: "Incorrect Password", status: false }); 
     }
-    const token = await generateUserToken(email)
-    console.log(token,33);
+  
     return res
         .status(200)
         .send({
@@ -45,7 +44,9 @@ const login = async (req, res, next) => {
             status: true,
             token
         });
-  } catch (error) {}
+  } catch (error) {
+    next(error)
+  }
 };
 
 export { signup };
