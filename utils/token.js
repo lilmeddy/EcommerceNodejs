@@ -1,5 +1,6 @@
-import { sign, verify } from "jsonwebtoken";
-const secret = procees.env.JWT_SECRET;
+import jwt from "jsonwebtoken";
+import { secret } from "../config/constants.js";
+const  { sign, verify } = jwt
 
 export const signToken = (payload) => {
   let token = sign(payload, secret, {

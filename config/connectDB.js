@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import { mongoUri } from "./constants.js";
 
-const uri = process.env.MONGODB_URI;
-const connectDB = async () =>{
-    try {
-        mongoose.set("strictQuery", false);
-        await mongoose.connect(uri)
-        console.log("connected");
-    } catch (error) {
-       console.log("error" + error); 
-    }
-}
+const connectDB = async () => {
+  try {
+    mongoose.set("strictQuery", false);
+    let connect = await mongoose.connect(mongoUri);
+    console.log(`Database connected at ${connect.connection.host}`);
+  } catch (error) {
+    console.log("error" + error);
+  }
+};
 
-export { connectDB };
+export default connectDB;

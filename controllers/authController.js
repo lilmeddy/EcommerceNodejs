@@ -1,26 +1,27 @@
 import { User } from "../models/userModel.js";
-import bcryptjs from "bcryptjs";
-import { comparePassword } from "../utils/password.js";
+import { sendMail } from "../config/mailConfig.js";
+import { hashPassword, comparePassword } from "../utils/password.js";
 import { signToken } from "../utils/token.js";
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password, phone } = req.body;
     const checkUser = await User.findOne({ email });
     if (checkUser) {
       return res.status(401).json({ message: "Email used", status: false });
     }
-
+    const hash = await hashPassword(password);
     const newUser = await User.create({
       firstName,
       lastName,
       email,
-      password,
+      hash,
       phone,
     });
+    await sendMail(email, firstName);
     return res.status(201).json({ message: "User Created", status: true });
   } catch (error) {
-    throw new Error(error);
+    next(error);
   }
 };
 
