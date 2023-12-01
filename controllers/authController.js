@@ -41,7 +41,7 @@ const login = async (req, res, next) => {
         .json({ message: "Incorrect Password", status: false });
     }
 
-    const token = signToken(checkUser);
+    const token = signToken(checkUser._id);
 
     return res.status(200).json({
       message: `Login Successfully, User ${checkUser.firstName}`,
