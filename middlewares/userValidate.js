@@ -33,8 +33,8 @@ const userLoginValidate = yup.object({
 
   password: yup
     .string("First name must be a string")
-    .min(8, "Password is too short")
-    .max(20, "Password is too long")
+    .min(6, "Password is too short")
+    .max(8, "Password is too long")
     .required("Password is required")
     .matches(/^[a-zA-Z0-9]+$/, "Password must contain letters and numbers"),
 });

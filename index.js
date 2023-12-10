@@ -3,6 +3,7 @@ import cors from "cors";
 import connectDB from "./config/connectDB.js";
 import authRouter from "./routes/authRouter.js";
 import { port } from "./config/constants.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 import morgan from "morgan";
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(morgan("dev"))
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 app.use("/auth", authRouter);
+app.use(errorHandler)
 
 const startApp = async () => {
   await connectDB();
